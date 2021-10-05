@@ -13,7 +13,8 @@ const url = process.env.MONGO_URL
 let app  =  express();
 
 // settings
-app.set('port', process.env.PORT || 4000);
+//app.set('port', process.env.PORT || 3000);
+const port = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
 app.use(logger('dev'));
@@ -82,7 +83,7 @@ mongodb.MongoClient.connect(url, (error, database) => {
     //  app.listen(3000, ()=>{
     //     console.log('Express server corriendo en el puesto 3000: \x1b[32m','online');
     // })
-    app.listen(app.get('port'), () => {
+    app.listen(port, () => {
     console.log(`Server on port ${app.get('port')}`);
 });
 });
