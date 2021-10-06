@@ -3,4 +3,4 @@
 ###  sub sub titulo
 
 
-**git init **: *Inicaliza el protecto*
+**git init**: *Inicaliza el protecto*
