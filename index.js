@@ -5,6 +5,7 @@ const mongodb = require('mongodb')
 const logger =  require('morgan');
 const bodyParser =  require('body-parser');
 const errorhandler =  require('errorhandler');
+const cors = require('cors')
 
 
 //const url = 'mongodb://localhost:27017/';
@@ -18,6 +19,7 @@ const port = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
 app.use(logger('dev'));
+app.use(cors())
 
 
 mongodb.MongoClient.connect(url, (error, database) => {
