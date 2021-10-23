@@ -28,7 +28,7 @@ mongodb.MongoClient.connect(url, (error, database) => {
     const db = database.db('702nosql');
     //console.log("Connection is OK");
 
-    app.get('/estudiantes',(req,res)=>{
+    app.get('/users',(req,res)=>{
         db.collection('estudiantes').find().toArray((error,results)=>{
             if(error) return next(error);
             console.log(results);
@@ -36,7 +36,7 @@ mongodb.MongoClient.connect(url, (error, database) => {
         });
     });
 
-    app.post('/estudiantes',(req, res)=>{
+    app.post('/users',(req, res)=>{
         let newAccount =  req.body;
         db.collection('estudiantes').insert(newAccount,(error,results)=>{
             if(error)  return next(error);
@@ -44,7 +44,7 @@ mongodb.MongoClient.connect(url, (error, database) => {
         });
     });
 
-    app.put('/estudiantes/:id',(req,res)=>{
+    app.put('/users/:id',(req,res)=>{
         db.collection('estudiantes').update(
             {_id: mongodb.ObjectID(req.params.id)},
             {$set:req.body},
@@ -54,37 +54,12 @@ mongodb.MongoClient.connect(url, (error, database) => {
             });
     });
 
-    app.delete('/estudiantes/:id',(req,res)=>{
+    app.delete('/users/:id',(req,res)=>{
         db.collection('estudiantes').remove({_id: mongodb.ObjectID(req.params.id)},(error,results)=>{
             if(error) console.log(error);
             res.send(results);
         });
     });
-
-    /* API Maestros */
-
-    app.get('/maestros',(req,res)=>{
-        db.collection('maestros').find().toArray((error,results)=>{
-            if(error) return next(error);
-            console.log(results);
-            res.send(results);
-        });
-    });
-
-    app.post('/maestros',(req, res)=>{
-        let newAccount =  req.body;
-        db.collection('maestros').insert(newAccount,(error,results)=>{
-            if(error)  return next(error);
-            res.send(results);
-        });
-    });
-
- 
-
-
-    //  app.listen(3000, ()=>{
-    //     console.log('Express server corriendo en el puesto 3000: \x1b[32m','online');
-    // })
     app.listen(port, () => {
     console.log(`Server on port ${app.get('port')}`);
 });
