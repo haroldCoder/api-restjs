@@ -6,6 +6,7 @@ const logger =  require('morgan');
 const bodyParser =  require('body-parser');
 const errorhandler =  require('errorhandler');
 const cors = require('cors')
+const koder = require('./kode.json');
 
 
 //const url = 'mongodb://localhost:27017/';
@@ -33,6 +34,7 @@ mongodb.MongoClient.connect(url, (error, database) => {
             if(error) return next(error);
             console.log(results);
             res.send(results);
+            
         });
     });
 
@@ -40,7 +42,8 @@ mongodb.MongoClient.connect(url, (error, database) => {
         let newAccount =  req.body;
         db.collection('estudiantes').insert(newAccount,(error,results)=>{
             if(error)  return next(error);
-            res.send(results);
+            res.send(results)
+            koder.push(results);
         });
     });
 
